@@ -1,0 +1,27 @@
+.form-title{
+	margin-left: 20px;
+	margin-top: 2px;
+	margin-bottom: 0px;
+	font-family: 'Do Hyeon', sans-serif;
+}
+form{
+	padding: 20px;
+	display: inline-block;
+}
+label { 
+	font-weight: bold; 
+	display: block; 
+	width: 100px; 
+	float: left;
+}
+label, input {
+    display: block;
+    border-color: #1c005c;
+}
+#load_map{
+	margin-right: auto;
+	margin-left: auto;
+	border-radius: 40px;
+	background-color: #1c005c;
+	border-color: #1c005c;
+}

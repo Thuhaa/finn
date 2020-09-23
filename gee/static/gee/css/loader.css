@@ -1,0 +1,15 @@
+#loader {
+    display: none;
+    position: absolute;
+    top: calc(50vh - 185px);
+    left: calc(50vw - 186px);
+}
+
+#loader img {
+    border-radius: 10%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#loader.show {
+    display: block;
+}

@@ -11,11 +11,19 @@ nav{
 	background-color: #1c005c;
 	font-family: 'Do Hyeon', sans-serif;
 }
+h4{
+	font-size: 1.9em;
+}
+h6{
+	font-family: 'Pacifico', cursive;
+	font-size: 0.4em;
+}
 .logo{
 	color: rgb(226,226,226);
 	text-transform: uppercase;
 	letter-spacing: 5px;
 	font-size: 20px;
+	display: flex;
 }
 .nav-links{
 	display: flex;

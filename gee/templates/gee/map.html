@@ -17,6 +17,9 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'gee/css/jquery-ui.css' %}">
 	<!--Google Fonts -->
 	<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet"/>
+	<style>
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+</style>
 	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <!-- Leaflet CSS and JS CDN -->
@@ -31,7 +34,11 @@
 <body>
 	<nav>
 		<div class="logo">
-			<h4>The Nav</h4>
+			<img src="{% static 'gee/img/world.png' %}" width="65px" height="65px">
+			<div class="logo-words">
+			<h4>GoalSpatial</h4>
+			<h6>Coordinates for Problems</h6>
+		</div>
 		</div>
 		<ul class="nav-links">
 			<li>

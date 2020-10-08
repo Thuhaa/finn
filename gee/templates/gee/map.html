@@ -137,14 +137,9 @@
 						console.log("success"); // another sanity check
 						var geem = new L.tileLayer(json.url, {attribution:'&copy; <a href="https://www.earthengine.google.com/copyright">Google Earth Engine</a>'}).addTo(map);
 						geem.on('tileload', function() {
-							$('#loader').addClass('show');
-							var imageUrl = '{% static "gee/img/loader.gif" %}';
-							var overlay = L.imageOverlay(imageUrl);
-							overlay.addTo(map);
 							console.log("Loading the requested data......")
 						});
 						geem.on('load', function() {
-							$('#loader').removeClass('show');
 							console.log("Data loaded.")
 						});
 					},

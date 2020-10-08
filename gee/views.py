@@ -16,6 +16,7 @@ def map_view(request):
     This will be the mapview
     '''
     satellite_data_form = SatelliteDataForm()
+
     latest_date = dt.datetime.today().strftime('%Y-%m-%d')
     context =   {
     'satellite_data_form':satellite_data_form,
@@ -23,28 +24,6 @@ def map_view(request):
     'latest_date':latest_date,
     }
     return render(request, 'gee/map.html', context)
-
-def get_ee_data(request):
-    '''
-    This is the view to call earth engine data
-    '''
-    dataset = (ee.ImageCollection('MODIS/006/MOD13Q1')
-        .filter(ee.Filter.date('2019-07-01', '2019-11-30'))
-        .first())
-    modisndvi = dataset.select('NDVI')
-
-    vis_paramsNDVI = {
-    'min': 0,
-    'max': 9000,
-    'palette': [ 'FE8374', 'C0E5DE', '3A837C','034B48',]}
-
-    map_id_dict = ee.Image(modisndvi).getMapId(vis_paramsNDVI)
-
-    tiles = map_id_dict['tile_fetcher'].url_format
-
-    print(tiles)
-    HttpResponse(tiles)
-
 
 def get_image_collection(request):
     """

@@ -1,10 +1,12 @@
 from django import forms
 from earthengine.products import EE_PRODUCTS
 from django.contrib.admin import widgets
-# Initialize the platform, sensor and product choices tuples with empty lists
-PLATFORM_CHOICES = []
-SENSOR_CHOICES = []
-PRODUCT_CHOICES = []
+
+# Initialize the platform options
+platform_options = [
+('modis', 'MODIS'),
+('sentinel', 'Sentinel'),
+('landsat', 'Landsat')]
 
 REDUCTION_METHOD_CHOICES = (
 	('median', 'median'),
@@ -18,33 +20,33 @@ REDUCTION_METHOD_CHOICES = (
 	('product', 'product'),
 	)
 
-TEST_CHOICES = (('this', 'this'),('that', 'that'),('then', 'then'))
+default_platform = 'modis'
+default_sensors = EE_PRODUCTS[default_platform]
+first_sensor_key = next(iter(default_sensors.keys()))
+default_products = default_sensors[first_sensor_key]
+first_product_key = next(iter(default_products.keys()))
+first_product = default_products[first_product_key]
 
-# The following code tries to populate the form choices automatically from the data given in the products.py file
-for platform in EE_PRODUCTS.keys():
-	PLATFORM_CHOICES.append((platform, platform.upper()))
-	
-	for sensor in EE_PRODUCTS[platform].keys():
-		SENSOR_CHOICES.append((sensor,sensor))
 
-		for product in EE_PRODUCTS[platform][sensor].keys():
-			PRODUCT_CHOICES.append(
-				(product, 
-				EE_PRODUCTS[platform][sensor][product]['display'])
-				)
+sensor_options = []
+for sensor in default_sensors:
+    sensor_options.append((sensor, sensor.upper()))
 
+product_options = []
+for product, info in default_products.items():
+    product_options.append((product, info['display']))
 
 class SatelliteDataForm(forms.Form):
 	"""
 	The satellite data form with the following fields
 	"""
-	platforms = forms.ChoiceField(choices = PLATFORM_CHOICES, 
+	platforms = forms.ChoiceField(choices = platform_options, 
 		widget = forms.Select(attrs={'class':'form-control'}))
 
-	sensors = forms.ChoiceField(choices = SENSOR_CHOICES, 
+	sensors = forms.ChoiceField(choices = sensor_options, 
 		widget = forms.Select(attrs={'class':'form-control'}))
 
-	products = forms.ChoiceField(choices = PRODUCT_CHOICES, 
+	products = forms.ChoiceField(choices = product_options, 
 		widget = forms.Select(attrs={'class':'form-control'}))
 
 	reducer = forms.ChoiceField(choices = REDUCTION_METHOD_CHOICES, 

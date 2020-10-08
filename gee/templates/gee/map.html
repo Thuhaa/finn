@@ -35,7 +35,7 @@
 <body>
 	<nav>
 		<div class="logo">
-			<img src="{% static 'gee/img/world.png' %}" width="65px" height="65px">
+			<img src="{% static 'gee/img/world_map.png' %}" width="130px" height="65px">
 			<div class="logo-words">
 				<h4>GoalSpatial</h4>
 				<h6>Coordinates for Problems</h6>
@@ -135,7 +135,18 @@
 					success: function data_loaded(json) {
 						console.log(json); // log the returned json to the console
 						console.log("success"); // another sanity check
-						L.tileLayer(json.url, {attribution:'&copy; <a href="https://www.earthengine.google.com/copyright">Google Earth Engine</a>'}).addTo(map);
+						var geem = new L.tileLayer(json.url, {attribution:'&copy; <a href="https://www.earthengine.google.com/copyright">Google Earth Engine</a>'}).addTo(map);
+						geem.on('tileload', function() {
+							$('#loader').addClass('show');
+							var imageUrl = '{% static "gee/img/loader.gif" %}';
+							var overlay = L.imageOverlay(imageUrl);
+							overlay.addTo(map);
+							console.log("Loading the requested data......")
+						});
+						geem.on('load', function() {
+							$('#loader').removeClass('show');
+							console.log("Data loaded.")
+						});
 					},
 
 					// handle a non-successful response

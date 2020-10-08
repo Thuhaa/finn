@@ -1,7 +1,7 @@
 import datetime as dt
 import logging
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseNotAllowed
 from django.core.serializers import serialize
 import folium
 import ee
@@ -71,8 +71,11 @@ def get_image_collection(request):
             reducer=reducer
         )
 
+        print(platform, sensor, product, start_date, end_date, reducer)
         response_data.update({
             'success': True,
             'url': url
         })
+        #the_response_data = json.dumps(response_data)
+        #print(the_response_data)
         return JsonResponse(response_data)

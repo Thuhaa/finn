@@ -12,7 +12,6 @@ var GEE_DATASETS = (function() {
         INITIAL_END_DATE,
         EE_PRODUCTS,
         THE_PRODUCTS;
-
     var m_map,
         m_gee_layer;
 
@@ -102,12 +101,13 @@ var GEE_DATASETS = (function() {
             }
         });
 
-        $('#load_map').on('click', function() {
+        /*$('#load_map').on('click', function() {
             update_map();
         });
+
         $('#clear_map').on('click', function() {
             clear_map();
-        });
+        });*/
 
 
     };
@@ -165,7 +165,7 @@ var GEE_DATASETS = (function() {
         console.log('Date Bounds Changed To: ' + earliest_valid_date + ' - ' + latest_valid_date);
     };
 
-    collect_data = function() {
+    /*collect_data = function() {
         let data = {
             platform: m_platform,
             sensor: m_sensor,
@@ -177,7 +177,7 @@ var GEE_DATASETS = (function() {
         return data;
     };
     // Map Methods
-    /*update_map = function() {
+    update_map = function() {
     let data = collect_data();
 
     let xhr = $.ajax({
@@ -199,23 +199,22 @@ var GEE_DATASETS = (function() {
 
     update_data_layer = function(url) {
     if (!m_gee_layer) {
-        create_data_layer(url);
+        create_data_layer(response.url);
     } else {
         m_gee_layer.getSource().setUrl(url);
     }
 };
 
     create_data_layer = function(url) {
-    let source = new ol.source.XYZ({
-        url: url,
-        attributions: '<a href="https://earthengine.google.com" target="_">Google Earth Engine</a>'
-    });
+    let source = L.tileLayer(response.url, {
+            attribution: '&copy; <a href="https://www.earthengine.google.com">Google Earth Engine</a>'
+        }).addTo(map);
 
     source.on('tileloadstart', function() {
         $('#loader').addClass('show');
     });
 
-    source.on('tileloadend', function() {
+    source.on('tileload', function() {
         $('#loader').removeClass('show');
     });
 
@@ -223,9 +222,9 @@ var GEE_DATASETS = (function() {
         $('#loader').removeClass('show');
     });
 
-    m_gee_layer = new ol.layer.Tile({
-        source: source,
-        opacity: 0.7
+    m_gee_layer = L.tileLayer({
+        url: url,
+        attribution: '&copy; <a href="https://www.earthengine.google.com">Google Earth Engine</a>'
     });
 
     // Insert below the draw layer (so drawn polygons and points render on top of the data layer).

@@ -132,9 +132,10 @@
 				},
 
 					// handle a successful response
-					success: function (json) {
+					success: function data_loaded(json) {
 						console.log(json); // log the returned json to the console
 						console.log("success"); // another sanity check
+						L.tileLayer(json.url, {attribution:'&copy; <a href="https://www.earthengine.google.com/copyright">Google Earth Engine</a>'}).addTo(map);
 					},
 
 					// handle a non-successful response
@@ -145,8 +146,7 @@
 				});
 			}
 		});
-	</script>
-	<script type="text/javascript">
+
 		var map = L.map('map-div').setView([0.3556, 37.5833], 6);
 
 		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -154,9 +154,6 @@
 		}).addTo(map);
 		L.marker([0.3556, 37.5833]).addTo(map)
 			.bindPopup('Approximately the center of Kenya');
-		L.tileLayer("https://earthengine.googleapis.com/v1alpha/projects/earthengine-legacy/maps/5fe1790b3c6ee7cf526191c76bd4bc76-d8a9a800699f50962e8712fea134f3f3/tiles/{z}/{x}/{y}", {
-			attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-		}).addTo(map);
 	</script>
 	<script src="{% static 'gee/js/nav.js' %}"></script>
 	<script src="{% static 'gee/js/bootstrap.js' %}"></script>

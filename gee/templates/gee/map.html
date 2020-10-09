@@ -83,35 +83,10 @@
 		<div class="map-div" id="map-div">
 		</div>
 	</div>
-	{% if error %}
-	<script type="text/javascript">
-		$('#errorModal').modal("show");
-	</script>
-	{% endif %}
 	<div id="ee-products" data-ee-products="{{ ee_products }}">
-		<div id="loader">
-			<img src="{% static 'gee/img/loader.gif' %}">
-		</div>
+		
 	</div>
-	<div class="modal" tabindex="-1" role="dialog" id="errorModal">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title">Earth Engine Error</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<p>Error</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary">Save changes</button>
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
+<div id="overlay"></div>
 	<script type="text/javascript">
 		$('#form-prds').on('submit', function (e) {
 			e.preventDefault();
@@ -122,37 +97,38 @@
 				$.ajax({
 					url: "{% url 'get-image-collection' %}", // the endpoint
 					type: "POST", // http method
-					data: { 
-					platforms: $('#id_platforms').val(),
-					sensors : $('#id_sensors').val(),
-					products : $('#id_products').val(),
-					start_date : $('#id_start_date').val(),
-					end_date : $('#id_end_date').val(),
-					reducer :$('#id_reducer').val()
-				},
+					data: {
+						platforms: $('#id_platforms').val(),
+						sensors: $('#id_sensors').val(),
+						products: $('#id_products').val(),
+						start_date: $('#id_start_date').val(),
+						end_date: $('#id_end_date').val(),
+						reducer: $('#id_reducer').val()
+					},
 
 					// handle a successful response
 					success: function data_loaded(json) {
 						console.log(json); // log the returned json to the console
 						console.log("success"); // another sanity check
-						var geem = new L.tileLayer(json.url, {attribution:'&copy; <a href="https://www.earthengine.google.com/copyright">Google Earth Engine</a>'}).addTo(map);
-						geem.on('tileload', function() {
+						var geem = new L.tileLayer(json.url, { attribution: '&copy; <a href="https://www.earthengine.google.com/copyright">Google Earth Engine</a>' }).addTo(map);
+						geem.on('tileload', function () {
 							console.log("Loading the requested data......")
+							document.getElementById('overlay').style.display = 'block';
 						});
-						geem.on('load', function() {
+						geem.on('load', function () {
 							console.log("Data loaded.")
+							document.getElementById('overlay').style.display = 'none';
 						});
 					},
 
 					// handle a non-successful response
 					error: function (xhr, errmsg, err) {
-						 // add the error to the dom
-						 alert("There was an error loading the requested data")
+						// add the error to the dom
+						alert("There was an error loading the requested data")
 					}
 				});
 			}
 		});
-
 		var map = L.map('map-div').setView([0.3556, 37.5833], 6);
 
 		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

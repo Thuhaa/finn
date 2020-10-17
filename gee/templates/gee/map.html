@@ -22,6 +22,7 @@
 	</style>
 	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
 	<!-- Leaflet CSS and JS CDN -->
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
 		integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
@@ -84,11 +85,11 @@
 		</div>
 	</div>
 	<div id="ee-products" data-ee-products="{{ ee_products }}">
-		
+
 	</div>
-<div id="overlay"></div>
+	<div id="overlay"></div>
 	<script type="text/javascript">
-		$('#form-prds').on('submit', function (e) {
+		$('#form-prds').on('submit', function loadProducts(e) {
 			e.preventDefault();
 			console.log("form submitted!");
 			update_map();
@@ -108,19 +109,31 @@
 
 					// handle a successful response
 					success: function data_loaded(json) {
+
 						console.log(json); // log the returned json to the console
 						console.log("success"); // another sanity check
-						var geem = new L.tileLayer(json.url, { attribution: '&copy; <a href="https://www.earthengine.google.com/copyright">Google Earth Engine</a>' }).addTo(map);
-						geem.on('tileload', function () {
-							console.log("Loading the requested data......")
-							document.getElementById('overlay').style.display = 'block';
-						});
-						geem.on('load', function () {
-							console.log("Data loaded.")
-							document.getElementById('overlay').style.display = 'none';
-						});
+						var gee_layer = new L.tileLayer(json.url, { attribution: '&copy; <a href="https://www.earthengine.google.com/copyright">Google Earth Engine</a>'})
+						function get_gee_layer(){
+							gee_layer.addTo(map);
+							var baseMaps = {
+								"OpenStreetMap": openstreetmap,
+							};
+							var overlaymaps = {
+								lyr:gee_layer,
+							}
+							L.control.layers(baseMaps, overlaymaps).addTo(map);
+							gee_layer.on('tileload', function () {
+								console.log("Loading the requested data......");
+								document.getElementById('overlay').style.display = 'block';
+							});
+							gee_layer.on('load', function () {
+								console.log("Data loaded.");
+								document.getElementById('overlay').style.display = 'none';
+							});
+							return gee_layer;
+						};
+						get_gee_layer();
 					},
-
 					// handle a non-successful response
 					error: function (xhr, errmsg, err) {
 						// add the error to the dom
@@ -129,11 +142,14 @@
 				});
 			}
 		});
-		var map = L.map('map-div').setView([0.3556, 37.5833], 6);
-
-		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		var map = L.map('map-div', {
+			center: [0.3556, 37.5833],
+			zoom: 6,
+		});
+		var openstreetmap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 		}).addTo(map);
+		//let overlaymaps = loadProducts().update_layer_control();
 		L.marker([0.3556, 37.5833]).addTo(map)
 			.bindPopup('Approximately the center of Kenya');
 	</script>

@@ -53,7 +53,8 @@ def get_image_collection(request):
         print(platform, sensor, product, start_date, end_date, reducer)
         response_data.update({
             'success': True,
-            'url': url
+            'url': url,
+            'products':product
         })
         #the_response_data = json.dumps(response_data)
         #print(the_response_data)

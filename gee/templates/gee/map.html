@@ -120,7 +120,7 @@
 							};
 							var overlaymaps = {
 								lyr:gee_layer,
-							}
+							};
 							L.control.layers(baseMaps, overlaymaps).addTo(map);
 							gee_layer.on('tileload', function () {
 								console.log("Loading the requested data......");

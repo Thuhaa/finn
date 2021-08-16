@@ -7,7 +7,7 @@ from . import params as gee_account
 
 
 
-
+# Authenticate the user
 if gee_account.service_account:
     try:
         credentials = ee.ServiceAccountCredentials(gee_account.service_account, gee_account.private_key)

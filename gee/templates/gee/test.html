@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+{% load static %}
+<html style="font-size: 16px;">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="page_type" content="np-template-header-footer-from-plugin">
+    <title>Map</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'gee/css/bootstrap.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'gee/css/nav.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'gee/css/nav.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'gee/css/main.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'gee/css/form.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'gee/css/loader.css' %}" />
+    <link rel="stylesheet" href="{% static 'gee/css/nicepage.css' %}" media="screen">
+<link rel="stylesheet" href="{% static 'gee/css/test.css' %}" media="screen">
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="{% static 'gee/js/nicepage.js' %}" defer=""></script>
+    <meta name="generator" content="Nicepage 3.11.0, nicepage.com">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
+    
+    
+    <script type="application/ld+json">{
+		"@context": "http://schema.org",
+		"@type": "Organization",
+		"name": "GS GoogleEarthEngine",
+		"url": "index.html",
+		"logo": "images/world_map.png"
+}</script>
+    <meta property="og:title" content="Map">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#1c005c">
+    <link rel="canonical" href="index.html">
+    <meta property="og:url" content="index.html">
+    <!-- Leaflet CSS and JS CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""></script>
+  </head>
+  <body class="u-body"><header class="u-clearfix u-header u-palette-1-base u-header" id="sec-83a0"><a href="https://nicepage.com" class="u-image u-logo u-image-1" data-image-width="1600" data-image-height="669">
+        <img src="images/world_map.png" class="u-logo-image u-logo-image-1" data-image-width="200.5384">
+      </a><nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1" data-responsive-from="MD">
+        <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
+          <a class="u-button-style u-custom-active-color u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-text-active-color u-custom-top-bottom-menu-spacing u-nav-link u-palette-1-base u-text-active-palette-1-base u-text-custom-color-3 u-text-hover-palette-2-base" href="#" style="padding: 12px 14px; font-size: calc(1em + 24px); background-image: none;">
+            <svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu-hamburger"></use></svg>
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><symbol id="menu-hamburger" viewBox="0 0 16 16" style="width: 16px; height: 16px;"><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect>
+</symbol>
+</defs></svg>
+          </a>
+        </div>
+        <div class="u-custom-menu u-nav-container">
+          <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-active-custom-color-3 u-button-style u-nav-link u-text-active-palette-2-base u-text-hover-palette-2-base" href="Home.html" style="padding: 28px 20px;">Home</a>
+</li><li class="u-nav-item"><a class="u-active-custom-color-3 u-button-style u-nav-link u-text-active-palette-2-base u-text-hover-palette-2-base" href="Map.html" style="padding: 28px 20px;">Map</a>
+</li></ul>
+        </div>
+        <div class="u-custom-menu u-nav-container-collapse">
+          <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
+            <div class="u-sidenav-overflow">
+              <div class="u-menu-close"></div>
+              <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Home.html" style="padding: 28px 20px;">Home</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Map.html" style="padding: 28px 20px;">Map</a>
+</li></ul>
+            </div>
+          </div>
+          <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
+        </div>
+      </nav></header>
+    <section class="u-clearfix u-section-1" id="sec-dc22">
+      <div class="u-clearfix u-expanded-width u-gutter-0 u-layout-wrap u-layout-wrap-1">
+        <div class="u-layout">
+          <div class="u-layout-row">
+            <div class="u-container-style u-layout-cell u-size-15 u-layout-cell-1">
+              <div class="u-container-layout u-container-layout-1">
+                <div class="u-clearfix u-custom-html u-expanded-width u-grey-15 u-custom-html-1">
+                  <style> .form-title{
+	margin-left: 20px;
+	margin-top: 2px;
+	margin-bottom: 0px;
+	font-family: 'Do Hyeon', sans-serif;
+}
+form{
+	padding: 20px;
+	display: inline-block;
+}
+label { 
+	font-weight: bold; 
+	display: block; 
+	width: 100px; 
+	float: left;
+}
+label, input {
+    display: block;
+    border-color: #1c005c;
+}
+#load_map{
+	margin-right: auto;
+	margin-left: auto;
+	border-radius: 40px;
+	background-color: #1c005c;
+	border-color: #1c005c;
+} </style>
+                  <div class="form-div">
+                    <h3 class="form-title">Select Dataset</h3>
+                    <form method="post" action="{% url 'get-image-collection' %}" id="form-prds"> {% csrf_token %}
+				{{ satellite_data_form }} <br>
+                      <label for="id_start_date">Start date:</label>
+                      <input type="date" name="start_date" required="" id="id_start_date" min="2000-02-24" max="{{ latest_date }}">
+                      <br>
+                      <label for="id_end_date">End date:</label>
+                      <input type="date" name="end_date" required="" id="id_end_date" min="2000-02-24" max="{{ latest_date }}">
+                      <br>
+                      <input type="submit" name="submit" class="btn btn-primary" id="load_map" value="Load Selected Products">
+                      <input type="hidden" value="" name="recaptchaResponse">
+                    </form>
+                    <button id="clear_map" class="btn">Clear Current Products</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="u-container-style u-layout-cell u-size-45 u-layout-cell-2">
+              <div class="u-container-layout u-container-layout-2">
+                <div class="u-clearfix u-custom-html u-custom-html-2">
+                  <style></style>
+                  <div class="map-div" id="map-div">
+                    <script> var map = L.map('map-div', {
+			center: [0.3556, 37.5833],
+			zoom: 6,
+		});
+		var openstreetmap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+		}).addTo(map);
+		//let overlaymaps = loadProducts().update_layer_control();
+		L.marker([0.3556, 37.5833]).addTo(map)
+			.bindPopup('Approximately the center of Kenya');</script>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    
+    <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-d2f2"><div class="u-clearfix u-sheet u-sheet-1">
+        <p class="u-small-text u-text u-text-variant u-text-1">Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
+      </div></footer>
+    <section class="u-backlink u-clearfix u-grey-80">
+      <a class="u-link" href="https://nicepage.com/html-templates" target="_blank">
+        <span>HTML Website Templates</span>
+      </a>
+      <p class="u-text">
+        <span>created with</span>
+      </p>
+      <a class="u-link" href="https://nicepage.com/html-website-builder" target="_blank">
+        <span>HTML Website Builder</span>
+      </a>. 
+    </section>
+    <script src="{% static 'gee/js/bootstrap.js' %}"></script>
+  <script src="{% static 'gee/js/gee_datasets.js' %}" type="text/javascript"></script>
+  <script src="{% static 'gee/js/main.js' %}"></script>
+  </body>
+</html>

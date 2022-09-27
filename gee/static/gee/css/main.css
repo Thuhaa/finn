@@ -5,12 +5,12 @@ div .row{
 	background-color: #e2e2e2;
 	float: left;
 	width: 25%;
-	height: 620px;
+	height: 100vh;
 }
 .map-div{
 	float: right;
 	width: 75%;
-	height: 620px;
+	height: 100vh;
 }
 #clear_map{
 	margin-right: auto;

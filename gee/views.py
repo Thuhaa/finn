@@ -11,6 +11,14 @@ from earthengine.products import EE_PRODUCTS
 from .forms import SatelliteDataForm
 from earthengine.methods import get_image_collection_asset
 
+
+def home_view(request):
+    '''
+    To prevent confusion of urls, here is a `home page` that will be loaded at the root
+    '''
+    return render(request, 'gee/index.html')
+
+
 def map_view(request):
     '''
     This will be the mapview

@@ -1,13 +1,13 @@
 *{
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 	box-sizing: border-box;
 }
 nav{
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
-	min-height: 8vh;
+	height: 10vh;
 	background-color: #1c005c;
 	font-family: 'Do Hyeon', sans-serif;
 }

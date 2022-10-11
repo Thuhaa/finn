@@ -1,16 +1,17 @@
 div .row{
 	padding: 30px;
 }
+
 .form-div{
 	background-color: #e2e2e2;
 	float: left;
 	width: 25%;
-	height: 100vh;
+	height: 90vh;
 }
 .map-div{
 	float: right;
 	width: 75%;
-	height: 100vh;
+	height: 90vh;
 }
 #clear_map{
 	margin-right: auto;
